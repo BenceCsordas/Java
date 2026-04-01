@@ -1,23 +1,30 @@
-package com.example.fovarosgui;
+package com.example.leltargui;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class HelloController {
     public ListView<Leltar> lview;
+    public ListView lview2;
+    public ComboBox cbox;
+    private ObservableList<Leltar> leltar = FXCollections.observableArrayList();
+
+    public void asd() {
+        System.out.println("asd");
+        loadL2();
+    }
+
 
     public class Leltar {
         public String megnevezes;
@@ -47,18 +54,28 @@ public class HelloController {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } finally {
+            List<Integer> evek = leltar.stream().map(obj->obj.beszEv).sorted().distinct().toList();
+            evek.forEach(obj->cbox.getItems().add(obj + ""));
+
+            cbox.getSelectionModel().select(0);
+            loadL2();
             if(beolvasas != null) beolvasas.close();
         }
 
     }
 
-    private ObservableList<Leltar> leltar = FXCollections.observableArrayList();
+    private void loadL2() {
+        String sel = String.valueOf(cbox.getSelectionModel().getSelectedItem());
+        System.out.println(sel);
+        ObservableList<Leltar> filtered = FXCollections.observableArrayList(leltar.stream().filter(obj->obj.beszEv==Integer.parseInt(sel)).toList());
+        System.out.println(filtered);
+        lview2.setItems(filtered);
+    }
 
 
     private FileChooser fc = new FileChooser();
 
     public void initialize() {
-
         fc.setInitialDirectory(new File("./"));
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV fájlok", "*.csv"));
         lview.setItems(leltar);
