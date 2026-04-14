@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" prefHeight="308.0" prefWidth="353.0" spacing="5.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="com.example.kigyokgui.HelloController">
+   <MenuBar>
+     <menus>
+       <Menu mnemonicParsing="false" text="Fájl">
+         <items>
+           <MenuItem mnemonicParsing="false" onAction="#onOpenClick" text="Megnyitás">
+                  <accelerator>
+                     <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                  </accelerator>
+               </MenuItem>
+               <MenuItem mnemonicParsing="false" onAction="#onCloseClick" text="Kilépés" />
+         </items>
+       </Menu>
+       <Menu mnemonicParsing="false" text="Súgó">
+         <items>
+           <MenuItem mnemonicParsing="false" onAction="#onAboutClick" text="Névjegy" />
+         </items>
+       </Menu>
+     </menus>
+   </MenuBar>
+   <HBox prefHeight="277.0" prefWidth="353.0" spacing="5.0">
+      <children>
+         <VBox prefHeight="197.0" prefWidth="181.0">
+            <children>
+               <ListView fx:id="kigyokList" minHeight="300.0" minWidth="300.0" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+            </children>
+         </VBox>
+         <VBox prefHeight="197.0" prefWidth="177.0" spacing="5.0">
+            <children>
+               <HBox prefHeight="26.0" prefWidth="175.0" spacing="5.0">
+                  <children>
+                     <TextField fx:id="kigyoTfield" prefHeight="25.0" prefWidth="144.0" />
+                     <Button mnemonicParsing="false" onAction="#filterKigyok" text="Szűrés" />
+                  </children>
+               </HBox>
+               <ListView fx:id="filteredKigyokList" minHeight="250.0" minWidth="200.0" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+            </children>
+         </VBox>
+      </children>
+      <VBox.margin>
+         <Insets />
+      </VBox.margin>
+      <padding>
+         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      </padding>
+   </HBox>
+</VBox>
